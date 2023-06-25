@@ -49,10 +49,10 @@ workflow {
     regenie_file_ch = REGENIE_STEP_2.out[1].flatten()
                       .map { file -> tuple(file.simpleName.split('_')[1..-1].join('_'), file)
                       }
+    
+    region_ch = chr_bgen_sample_ch.combine(regenie_file_ch).filter {it[0] == it[-1].simpleName.split('chr')[1].split('_')[0]}
 
-    region_ch = chr_bgen_sample_ch.combine(regenie_file_ch)
-    
-    
+
     REGION_FILTER(region_ch)
     
 
