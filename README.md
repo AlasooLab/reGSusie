@@ -1,3 +1,3 @@
 # GWAS_Nextflow_pipeline
 
-![reGSusie](https://github.com/idarahu/reGSusie/assets/102286655/90949f03-d598-4ff8-92fd-cf71701b8ab8)
+![reGSusie](https://github.com/idarahu/reGSusie/assets/102286655/148b0606-f24c-4c15-871f-8cd7ee9716e3)
