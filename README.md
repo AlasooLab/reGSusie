@@ -2,7 +2,7 @@
 ![GitHub](https://img.shields.io/badge/Version-1.0.0-blue.svg)
 ![GitHub](https://img.shields.io/badge/Nextflow-22.04.3-brightgreen.svg)
 
-![pipeline_full](https://github.com/idarahu/reGSusie/assets/102286655/e61a86a3-773f-45d8-a89f-0b0748a45da4)
+![reGSusie](https://github.com/AlasooLab/reGSusie/assets/102286655/9edeb237-7cde-4209-a1c5-fd6d6d73cc61)
 
 
 ## Overview
