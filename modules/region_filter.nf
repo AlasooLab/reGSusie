@@ -6,7 +6,6 @@ process REGION_FILTER {
         
     publishDir "${params.outdir}/${params.prefix2}/$phenotype_id/filtered_regions", mode: 'copy', pattern: '*_region.txt'
 
-
     input:
     tuple val(chromosome), file(bgen_file), file(bgi_file), file(sample_file), val(phenotype_id), path(regenie_out)
     
@@ -15,7 +14,6 @@ process REGION_FILTER {
     
     shell:
     '''
-    
     Rscript !{baseDir}/bin/region_filter.R \
      --regenie_out !{regenie_out} \
      --phenotype_id !{phenotype_id} \
@@ -28,6 +26,5 @@ process REGION_FILTER {
      --MHC_end !{params.MHC_end} \
      --remove_MHC !{params.remove_MHC} \
      --bgen_chr_has_zero !{params.bgen_chr_has_zero}
-     
-    '''
+     '''
 }
