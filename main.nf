@@ -49,8 +49,7 @@ workflow {
       
     chr_bgen_sample_ch = REGENIE_STEP_2.out[0]
     regenie_file_ch = REGENIE_STEP_2.out[1].flatten()
-                      .map { file -> tuple(file.simpleName.split('_')[1..-1].join('_'), file)
-                           }
+                                    .map { file -> tuple(file.simpleName.split('_')[1..-1].join('_'), file) }
     
     region_ch = chr_bgen_sample_ch.combine(regenie_file_ch)
                                   .filter { it[0] == it[-1].simpleName.split('chr')[1].split('_')[0] }
@@ -64,12 +63,11 @@ workflow {
   } else {
   
     regenie_file_ch2 = Channel.fromPath(params.regenie_outputs)
-                             .splitText() 
-                             .map { file -> tuple(file.split('/')[-1].split('\\.')[0].split('_')[1..-1].join('_'), 
-                                    file)
-                                  }
+                              .splitText() 
+                              .map { file -> tuple(file.split('/')[-1].split('\\.')[0].split('_')[1..-1].join('_'), file) }
+    
     region_ch = bgen_sample_ch.combine(regenie_file_ch2)
-                              .filter {it[0] == it[-1].split('/')[-1].split('\\.')[0].split('_')[0].split('chr')[1]}
+                              .filter { it[0] == it[-1].split('/')[-1].split('\\.')[0].split('_')[0].split('chr')[1] }
                                   
   }
 
@@ -79,9 +77,8 @@ workflow {
 
   ld_input_ch = REGION_FILTER.out[0].transpose()
                 .filter { it[5].name.split('_')[-2] != 'NULL' }
-  				      .map { chr, pheno_id, bgen_file, bgi_file, sample_file, region_file ->
-                       tuple(chr, pheno_id, region_file.name.split('_')[-2], region_file, bgen_file, bgi_file, sample_file) 
-  				           }
+  		.map { chr, pheno_id, bgen_file, bgi_file, sample_file, region_file ->
+                       tuple(chr, pheno_id, region_file.name.split('_')[-2], region_file, bgen_file, bgi_file, sample_file) }
 
   samples_ld_incl_ch = Channel.fromPath(params.samples_ld_incl).collect()                                  
     
@@ -92,7 +89,7 @@ workflow {
   segmentation_error_ch = LD_MATRIX_CALCULATOR.out[0].collect()
   
   
-  //SEGMENTATION_FAULT_CATCHER(segmentation_error_ch)
+  SEGMENTATION_FAULT_CATCHER(segmentation_error_ch)
   
     
   SUSIER(LD_MATRIX_CALCULATOR.out[0])
@@ -104,7 +101,7 @@ workflow {
   coloc3_ch = SUSIER.out[1].groupTuple()
 			   .combine(Channel.of('coloc3'))
 
-  clpp_ch = SUSIER.out[2].filter {it[1].name.split('_')[-2] != 'NULL'}
+  clpp_ch = SUSIER.out[2].filter { it[1].name.split('_')[-2] != 'NULL' }
 			 .groupTuple()
 			 .combine(Channel.of('clpp')).view()
 
@@ -112,4 +109,6 @@ workflow {
   DATA_COMBINER1(coloc5_ch)
   DATA_COMBINER2(coloc3_ch)  
   DATA_COMBINER3(clpp_ch) 
+
+
 }
