@@ -18,7 +18,6 @@ process LD_MATRIX_CALCULATOR {
     
     shell:
     '''  
-     
     cp !{filtered_regions} !{region}.z
 
     nsamples=$(wc -l < !{sample_file_incl}) 
@@ -37,6 +36,5 @@ process LD_MATRIX_CALCULATOR {
     --bcor-to-text
 
     gzip !{region}.ld
-    
     '''
 }
