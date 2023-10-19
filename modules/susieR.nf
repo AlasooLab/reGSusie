@@ -20,7 +20,6 @@ process SUSIER {
 
     shell:
     '''
-    
     nsamples=$(wc -l < !{samples})
 
     Rscript !{baseDir}/bin/susieR.R \
@@ -34,6 +33,5 @@ process SUSIER {
     --min-cs-corr 0.5 \
     --n-covariates !{params.n_covariates} \
     --GRCh !{params.GRCh}
-    
     '''
 }
