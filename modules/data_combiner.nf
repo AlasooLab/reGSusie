@@ -12,7 +12,6 @@ process DATA_COMBINER {
     
     shell:
     '''
-    
     cat !{susie_files[0]} | head -n 1 > header.txt
 
     chromosome_column=$(awk -v FS="\t" 'NR==1{for (i=1; i<=NF; i++) if ($i == "chromosome") print i}' header.txt)
@@ -27,6 +26,5 @@ process DATA_COMBINER {
     sort -t$'\t' -k$chromosome_column,$chromosome_column -k$position_column,$position_column -o !{phenotype_id}_!{file_type}_final.out !{phenotype_id}_!{file_type}_final.out
 
     gzip -c !{phenotype_id}_!{file_type}_final.out > !{phenotype_id}_!{file_type}_final.tsv.gz
-
     '''
 }
