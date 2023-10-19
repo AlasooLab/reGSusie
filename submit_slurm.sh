@@ -1,11 +1,11 @@
 #!/bin/bash
-
-#SBATCH --time=120:00:00
+# Define the parameters
+#SBATCH --time=***
 #SBATCH -N 1
 #SBATCH --ntasks-per-node=1
-#SBATCH --mem=2G
+#SBATCH --mem=***
 #SBATCH --job-name="reGSusie_workflow"
-#SBATCH --partition=intel
+#SBATCH --partition=***
 
 # Load needed system tools (Java 8 is required, one of singularity or anaconda - python 2.7 is needed,
 # depending on the method for dependancy management). The exact names of tool modules might depend on HPC.
