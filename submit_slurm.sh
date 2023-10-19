@@ -4,7 +4,7 @@
 #SBATCH -N 1
 #SBATCH --ntasks-per-node=1
 #SBATCH --mem=2G
-#SBATCH --job-name="UKBB_GWAS"
+#SBATCH --job-name="reGSusie_workflow"
 #SBATCH --partition=intel
 
 # Load needed system tools (Java 8 is required, one of singularity or anaconda - python 2.7 is needed,
