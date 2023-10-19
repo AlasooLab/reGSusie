@@ -7,8 +7,7 @@ process REGENIE_STEP_2 {
 		pattern: "*.regenie*"
     publishDir "${params.outdir}/${params.prefix1}/logs", mode:'copy',\
 		pattern:  "*.log"
-     
-    
+         
     // Input data    
     input:
     tuple val(chromosome), file(bgen_file), file(bgi_file), file(sample_file)
@@ -27,7 +26,6 @@ process REGENIE_STEP_2 {
     
     shell:         
     '''
-    
     nsamples=$(wc -l < !{samples_to_keep}) 
     minMAC=$((nsamples * 2 / 1000))
     
@@ -50,6 +48,5 @@ process REGENIE_STEP_2 {
     --pred !{pred_list} \
     --gz \
     --out chr!{chromosome} \
-
     '''
 }
